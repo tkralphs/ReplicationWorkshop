@@ -10,9 +10,9 @@ description: >-
   shared guidance.
 
 # Set this when the site gets a permanent home.
-# GitHub Pages *project* site (repo: replication-workshop-2027):
+# GitHub Pages *project* site (repo: ReplicationWorkshop):
 url: "https://tkralphs.github.io"
-baseurl: "/replication-workshop-2027"
+baseurl: "/ReplicationWorkshop"
 # When the site moves to COR@L, set url to the COR@L address and baseurl: "".
 
 # Contact / links used across the site

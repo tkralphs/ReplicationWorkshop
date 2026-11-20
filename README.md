@@ -42,17 +42,36 @@ python3 check_preview.py _preview/index.html
 `default` layout, `{{ content }}` and `{{ site.* }}`. It is for looking at the
 page, not for producing the real build.
 
-## Deploying (GitHub Pages)
+## Deploying (GitHub Pages) — currently gated OFF
 
-`.github/workflows/pages.yml` builds with `bundle exec jekyll build` and deploys
-with `actions/deploy-pages`. Pushing to `main` is the deploy.
+Repo: `tkralphs/ReplicationWorkshop`.
 
-One-time setup, in the repo:
+`.github/workflows/pages.yml` runs on every push to `main` and on manual
+dispatch. It **builds** every time; the **deploy** job is skipped unless the
+repository variable `DEPLOY_PAGES` is `"true"` (or a manual dispatch sets the
+`deploy` input). So while this is a draft, pushes produce a verified `_site/`
+artifact and nothing goes live.
 
-1. Settings → Pages → **Source: GitHub Actions**.
-2. Push. The run publishes to `https://tkralphs.github.io/replication-workshop-2027/`.
+To publish when the time comes:
 
-`_config.yml` already sets `url`/`baseurl` for that project-site URL.
+```sh
+# 1. enable Pages, building from Actions
+gh api -X POST repos/tkralphs/ReplicationWorkshop/pages \
+  -f build_type=workflow
+# 2. let the workflow deploy
+gh variable set DEPLOY_PAGES --repo tkralphs/ReplicationWorkshop --body true
+# 3. re-run (or push) — the site appears at the URL below
+gh workflow run pages.yml --repo tkralphs/ReplicationWorkshop
+```
+
+Site URL: `https://tkralphs.github.io/ReplicationWorkshop/`
+
+`_config.yml` sets `url` + `baseurl` for that project-site URL. The repo
+segment is camel-case (`ReplicationWorkshop`); if the site is ever renamed for
+public use, rename the repo and update `baseurl` to match.
+
+To stop deploying again: `gh variable set DEPLOY_PAGES --body false` (or delete
+the variable). That leaves the last published site up; to unpublish, see below.
 
 ### This is a draft — keep it out of search
 
@@ -69,7 +88,7 @@ Any of these, in increasing order of severity:
 
 | Action | Effect | Reversible |
 |---|---|---|
-| Settings → Pages → **Unpublish site**<br>(`gh api -X DELETE repos/tkralphs/replication-workshop-2027/pages`) | URL starts returning 404 within a minute; repo and history untouched | Yes — re-enable Pages and redeploy |
+| Settings → Pages → **Unpublish site**<br>(`gh api -X DELETE repos/tkralphs/ReplicationWorkshop/pages`) | URL starts returning 404 within a minute; repo and history untouched | Yes — re-enable Pages and redeploy |
 | Delete the `gh-pages` artifact / disable the workflow | Stops updates; last published site stays up | Yes |
 | Delete the repo | URL and repo gone | No |
 

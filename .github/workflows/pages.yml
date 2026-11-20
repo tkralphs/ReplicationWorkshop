@@ -1,9 +1,19 @@
-name: Build and deploy to GitHub Pages
+name: Build Jekyll site
+
+# Builds on every push to main and on manual dispatch.
+# Deployment to GitHub Pages is GATED: it only runs when the repository
+# variable DEPLOY_PAGES is "true" (or a manual dispatch asks for it).
+# Nothing is published until Pages is enabled and that variable is set.
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Deploy to GitHub Pages (requires Pages to be enabled)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -29,14 +39,16 @@ jobs:
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
 
-      - name: Configure Pages
-        id: pages
-        uses: actions/configure-pages@v5
-
       - name: Build with Jekyll
         run: bundle exec jekyll build --trace
         env:
           JEKYLL_ENV: production
+
+      - name: Report build output
+        run: |
+          echo "Site size: $(du -sh _site | cut -f1)"
+          echo "Files:"
+          find _site -type f | sort | sed 's/^/  /'
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -45,6 +57,7 @@ jobs:
 
   deploy:
     needs: build
+    if: vars.DEPLOY_PAGES == 'true' || (github.event_name == 'workflow_dispatch' && inputs.deploy)
     runs-on: ubuntu-latest
     environment:
       name: github-pages
