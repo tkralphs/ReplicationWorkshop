@@ -1,0 +1,32 @@
+# Jekyll configuration — Workshop on Replication in the Journal Review Process
+# Lehigh University, August 19-20, 2027
+
+title: "Workshop on Replication in the Journal Review Process"
+short_title: "Replication Workshop 2027"
+description: >-
+  A workshop on replication in the journal review process, held at Lehigh
+  University on August 19-20, 2027, immediately following MOPTA 2027.
+  Bringing editors and authors together to share experience and develop
+  shared guidance.
+
+# Set this when the site gets a permanent home.
+# GitHub Pages *project* site (repo: replication-workshop-2027):
+url: "https://tkralphs.github.io"
+baseurl: "/replication-workshop-2027"
+# When the site moves to COR@L, set url to the COR@L address and baseurl: "".
+
+# Contact / links used across the site
+contact_email: "ted@lehigh.edu"
+mopta_url: "https://coral.ise.lehigh.edu/mopta2027/"
+lehigh_ise_url: "https://ise.lehigh.edu/"
+lios_url: "https://coral.ise.lehigh.edu/lios/"
+
+markdown: kramdown
+permalink: pretty
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .bundle

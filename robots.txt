@@ -1,0 +1,5 @@
+# Was drafted without a site root; for a project site the crawler file must sit
+# at the origin root, which we do not control. The <meta name="robots"> tag in
+# the layout is what actually keeps this draft out of indexes.
+User-agent: *
+Disallow: /
