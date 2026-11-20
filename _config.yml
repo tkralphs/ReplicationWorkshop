@@ -30,6 +30,7 @@ exclude:
   - README.md
   - render_preview.py
   - check_preview.py
+  - make_portable.py
   - vendor
   - .bundle
   - .gitignore

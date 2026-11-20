@@ -85,8 +85,17 @@ gh run download --repo tkralphs/ReplicationWorkshop --name rendered-site --dir r
 ```
 
 That copy carries the `/ReplicationWorkshop/` prefix in its asset URLs, so it
-is correct when served from that path. To open `index.html` straight off disk,
-rewrite `href="/ReplicationWorkshop/` to `href="` first.
+is correct when served from that path, but opening `index.html` straight off
+disk renders unstyled (the CSS is looked up at the filesystem root). Fix a
+downloaded copy with:
+
+```sh
+python3 make_portable.py rendered-site      # strips /ReplicationWorkshop from hrefs
+```
+
+`render_preview.py` produces `_preview/` the same way (real content, baseurl
+stripped, relative asset paths) — that is why `_preview/index.html` opens
+standalone and `_site/index.html` does not.
 
 ### This is a draft — keep it out of search
 
