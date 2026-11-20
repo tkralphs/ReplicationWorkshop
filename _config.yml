@@ -28,5 +28,8 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  - render_preview.py
+  - check_preview.py
   - vendor
   - .bundle
+  - .gitignore
