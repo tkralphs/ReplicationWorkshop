@@ -73,6 +73,21 @@ public use, rename the repo and update `baseurl` to match.
 To stop deploying again: `gh variable set DEPLOY_PAGES --body false` (or delete
 the variable). That leaves the last published site up; to unpublish, see below.
 
+### Downloading the rendered site
+
+Every run uploads two artifacts to the run page:
+
+- `github-pages` — the tarball the deploy job publishes (retention 1 day)
+- `rendered-site` — a plain `_site/` folder, zipped (retention 30 days)
+
+```sh
+gh run download --repo tkralphs/ReplicationWorkshop --name rendered-site --dir rendered-site
+```
+
+That copy carries the `/ReplicationWorkshop/` prefix in its asset URLs, so it
+is correct when served from that path. To open `index.html` straight off disk,
+rewrite `href="/ReplicationWorkshop/` to `href="` first.
+
 ### This is a draft — keep it out of search
 
 - `_layouts/default.html` has `<meta name="robots" content="noindex, nofollow">`.
