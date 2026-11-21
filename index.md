@@ -35,10 +35,14 @@ Annual Meeting, with editors from four INFORMS journals.
 <section id="program" class="section section-alt">
 <div class="wrap" markdown="1">
 
+<div class="section-head" markdown="1">
+
 ## Program
 
 The agenda is still taking shape. A detailed program will be posted here.
 {: .section-sub}
+
+</div>
 
 {% include schedule.html %}
 
