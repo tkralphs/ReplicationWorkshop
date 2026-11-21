@@ -9,7 +9,10 @@ Built for GitHub Pages now, and for a move to the COR@L web server later.
 
 ```
 _config.yml            site title, description, contact + outbound links, url/baseurl
-index.html             all the content (single page, anchor sections)
+index.md               ALL THE PROSE — edit this for wording changes
+_includes/hero.html    hero banner (title, tagline, dates, buttons)
+_includes/facts.html   the four fact cards under the hero
+_includes/schedule.html  the two day cards in the Program section
 _layouts/default.html  header / main / footer shell (carries the draft noindex tag)
 assets/css/style.css   the whole visual design, no external dependencies
 Gemfile                jekyll ~> 4.3
@@ -17,10 +20,28 @@ robots.txt             belt-and-braces; see the note inside
 .github/workflows/     build + deploy to GitHub Pages
 render_preview.py      static preview without Ruby
 check_preview.py       tag-balance + local-link check on the preview
+make_portable.py       strip the baseurl from a downloaded build
 ```
 
 Content knobs live in `_config.yml` (`contact_email`, `mopta_url`,
 `lehigh_ise_url`, `lios_url`, `url`, `baseurl`).
+
+## Editing the page
+
+`index.md` is ordinary Markdown: `##` headings, paragraphs separated by a blank
+line, `-` lists, `[text](url)` links, `**bold**`. Sections are wrapped in the
+HTML `<section>`/`<div>` elements that carry the styling, and each wrapper has
+`markdown="1"` so kramdown parses what is inside as Markdown.
+
+Two conventions to know:
+
+- A line like `{: .aside}` immediately after a paragraph adds that CSS class to
+  it (kramdown inline attribute list). Used for the callout paragraphs.
+- The hero, fact strip and day cards are in `_includes/` because they are
+  structured HTML; edit those files to change the dates/room labels there.
+
+Anything you add inside a `markdown="1"` wrapper is normal Markdown — no need
+to escape it. Headings get automatic `id`s (e.g. `#program`).
 
 ## Preview
 
