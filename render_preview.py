@@ -85,12 +85,110 @@ def subst(template: str, ctx: dict[str, str]) -> str:
     return template
 
 
-def render(layout: str, ctx: dict[str, str]) -> str:
+def inline(text: str) -> str:
+    """Links, bold, italic, code — the only inline markup this site uses."""
+    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', text)
+    text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
+    text = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"<em>\1</em>", text)
+    text = re.sub(r"`([^`]+)`", r"<code>\1</code>", text)
+    return text
+
+
+IAL = re.compile(r"^\{:\s*\.([\w-]+)\s*\}$")
+HEADING = re.compile(r"^(#{1,6})\s+(.*)$")
+
+
+def md_to_html(text: str) -> str:
+    """Approximate kramdown for the subset this site uses.
+
+    Supports headings, paragraphs, `- ` lists, `{: .class}` IAL lines and raw
+    HTML blocks (including `markdown="1"` divs). This is a *preview*: the
+    real build in CI is authoritative.
+    """
+    out: list[str] = []
+    para: list[str] = []
+    wanted: str | None = None  # pending IAL class for the next flushed block
+    in_html = False
+    in_list = False
+
+    def flush() -> None:
+        nonlocal para, wanted
+        if not para:
+            return
+        body = inline(" ".join(x.strip() for x in para))
+        cls = f' class="{wanted}"' if wanted else ""
+        out.append(f"<p{cls}>{body}</p>")
+        para, wanted = [], None
+
+    def close_list() -> None:
+        nonlocal in_list
+        if in_list:
+            out.append("</ul>")
+            in_list = False
+
+    for raw in text.split("\n"):
+        line = raw.strip()
+
+        if not line:
+            flush()
+            close_list()
+            in_html = False
+            continue
+
+        m = IAL.match(line)
+        if m:
+            if para:
+                wanted = m.group(1)
+            elif in_list:
+                for i in range(len(out) - 1, -1, -1):
+                    if out[i].startswith("<ul"):
+                        out[i] = f'<ul class="{m.group(1)}">'
+                        break
+            continue
+
+        if not in_html and line.startswith("<"):
+            flush()
+            close_list()
+            out.append(line.replace(' markdown="1"', ""))
+            in_html = True
+            continue
+
+        if in_html:
+            out.append(raw)
+            continue
+
+        m = HEADING.match(line)
+        if m:
+            flush()
+            close_list()
+            level = len(m.group(1))
+            out.append(f"<h{level}>{inline(m.group(2))}</h{level}>")
+            continue
+
+        if line.startswith("- "):
+            flush()
+            if not in_list:
+                out.append("<ul>")
+                in_list = True
+            out.append(f"<li>{inline(line[2:])}</li>")
+            continue
+
+        close_list()
+        para.append(line)
+
+    flush()
+    close_list()
+    return "\n".join(out)
+
+
+def render(layout: str, ctx: dict[str, str], is_markdown: bool = False) -> str:
     # Substitute the page body first, then the layout that wraps it: re.sub()
     # does not rescan replacement text, so doing it in one pass would leave
     # `{{ site.* }}` inside the content untouched.
     ctx = dict(ctx)
     ctx["content"] = subst(ctx["content"], ctx)
+    if is_markdown:
+        ctx["content"] = md_to_html(ctx["content"])
     return subst(layout, ctx)
 
 
@@ -111,7 +209,7 @@ def main() -> None:
             continue  # not a Jekyll page (README, etc.)
         page_meta, body = split_front_matter(raw)
         ctx = {"site": site, "page": page_meta, "content": body}
-        html = render(layout, ctx)
+        html = render(layout, ctx, is_markdown=name.endswith(".md"))
         # Strip the project-site baseurl, then make asset URLs relative so the
         # preview renders from any subdirectory of a plain static server.
         baseurl = site.get("baseurl", "")
