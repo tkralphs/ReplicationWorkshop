@@ -10,9 +10,10 @@ Built for GitHub Pages now, and for a move to the COR@L web server later.
 ```
 _config.yml            site title, description, contact + outbound links, url/baseurl
 index.md               ALL THE PROSE — edit this for wording changes
-_includes/hero.html    hero banner (title, tagline, dates, buttons)
+_includes/hero.html    hero banner (title, tagline, dates, buttons, LIOS badge)
 _includes/facts.html   the four fact cards under the hero
 _includes/schedule.html  the two day cards in the Program section
+_includes/sponsors.html  the Sponsors band (LIOS / Lehigh ISE)
 _layouts/default.html  header / main / footer shell (carries the draft noindex tag)
 assets/css/style.css   the whole visual design, no external dependencies
 Gemfile                jekyll ~> 4.3
