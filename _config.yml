@@ -9,11 +9,12 @@ description: >-
   Bringing editors and authors together to share experience and develop
   shared guidance.
 
-# Set this when the site gets a permanent home.
-# GitHub Pages *project* site (repo: ReplicationWorkshop):
-url: "https://tkralphs.github.io"
-baseurl: "/ReplicationWorkshop"
-# When the site moves to COR@L, set url to the COR@L address and baseurl: "".
+# Hosted on COR@L under an Apache alias: https://coral.ise.lehigh.edu/~lrw2027/
+# `url` is the host only; `baseurl` is the path the site is served under, and
+# every asset link is prefixed with it. If baseurl is "" the page looks for
+# /assets/... at the server root and renders unstyled.
+url: "https://coral.ise.lehigh.edu"
+baseurl: "/~lrw2027"
 
 # Contact / links used across the site
 contact_email: "ted@lehigh.edu"

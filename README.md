@@ -89,9 +89,9 @@ gh workflow run pages.yml --repo tkralphs/ReplicationWorkshop
 
 Site URL: `https://tkralphs.github.io/ReplicationWorkshop/`
 
-`_config.yml` sets `url` + `baseurl` for that project-site URL. The repo
-segment is camel-case (`ReplicationWorkshop`); if the site is ever renamed for
-public use, rename the repo and update `baseurl` to match.
+`_config.yml` is now set up for COR@L (see below). To deploy to GitHub Pages
+instead, set `url: "https://tkralphs.github.io"` and
+`baseurl: "/ReplicationWorkshop"`.
 
 To stop deploying again: `gh variable set DEPLOY_PAGES --body false` (or delete
 the variable). That leaves the last published site up; to unpublish, see below.
@@ -143,12 +143,20 @@ Caveat that applies to any web takedown: caches, search-engine snippets, and
 the Wayback Machine can outlive the page. With `noindex` and no inbound links,
 the exposure is minimal.
 
-## Moving to COR@L later
+## Hosting on COR@L
 
-1. Set `url` to the COR@L address and `baseurl: ""`.
-2. Remove the `noindex` meta tag.
-3. `bundle exec jekyll build`, then copy `_site/` to the web root (or to a
-   subdirectory and set `baseurl` to that path).
+The site is served at `https://coral.ise.lehigh.edu/~lrw2027/` from
+`/srv/www/coral_users/lrw2027`, via an `Alias /~lrw2027` plus a matching
+`<Directory "/srv/www/coral_users/lrw2027">` block. Both live in
+`/etc/apache2/sites-available/000-default.conf` (http) **and** `trac.conf`
+(https), and the two copies must agree.
+
+1. `_config.yml` has `url: "https://coral.ise.lehigh.edu"` and
+   `baseurl: "/~lrw2027"`. `baseurl` must match the alias, or the CSS and
+   images 404.
+2. Remove the `noindex` meta tag when the site goes public.
+3. `bundle exec jekyll build`, then copy `_site/` into
+   `/srv/www/coral_users/lrw2027/` with directories 755 and files 644.
 
 The same `_site/` output is what the GitHub Actions run produces, so the build
 can also be pulled from the Actions artifact instead of building locally.
