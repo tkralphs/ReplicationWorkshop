@@ -11,14 +11,15 @@ layout: default
 
 ## About the workshop
 
-Replication is becoming part of the review process at a growing number of
+Replication studies are becoming part of the review process at a growing number of
 journals in operations research and the management sciences. Some journals
 already have a replication review in place; others are just beginning to
 consider one. Each has had to build its process largely from scratch.
 
-This workshop is meant to change that. The goal is to share experience and
-to develop shared guidance and procedures, so that journals do not each
-have to reinvent this wheel. Ideally, a written report will come out of the
+This workshop is meant to allow editors and authors to share experience and
+to develop shared guidance and procedures, both to avoid reinventing this wheel
+and to have consistency in review procedures across journals. 
+Ideally, a written report will come out of the
 workshop that can serve as a guide for editors just starting down this road.
 
 Because journals are at very different stages of adoption, we expect a
@@ -26,7 +27,7 @@ varied group — and varied opinions. The hope is that discussing the issues
 together yields a common vision of where this should go.
 
 This is the second workshop on the topic. The first was held at an INFORMS
-Annual Meeting, with editors from four INFORMS journals.
+Annual Meeting in Atlanta in 2025.
 {: .aside}
 
 </div>
@@ -53,9 +54,10 @@ Topics we expect to cover
 
 - Designing a replication review that fits an existing editorial process
 - Which papers to replicate, and how to decide
-- Finding replicators, and what to ask of them
+- Finding reviewers, and what to ask of them
 - Tools, infrastructure, and reproducibility standards
-- Reporting results, and handling disagreements
+- Reporting results and integrating with the regular review process
+- The use of AI throughout this process 
 - Cost, time, and the load on editors and authors
 
 Suggestions for the agenda are welcome — write to
@@ -75,7 +77,7 @@ Suggestions for the agenda are welcome — write to
 The workshop is built around editors of major journals in operations
 research and the management sciences, with authors and others in the
 review ecosystem taking part as well. Cross-flow between editors and
-authors is very much the point.
+authors is very much part of the goal.
 
 Invitations are going out over the coming months. If you edit a journal,
 or you work on the author side of this problem and would like to join the
@@ -83,7 +85,7 @@ conversation, please get in touch:
 [{{ site.contact_email }}](mailto:{{ site.contact_email }}).
 
 Registration details are not yet available. Travel support for invited
-participants will be handled individually.
+participants may be available.
 {: .aside}
 
 </div>
