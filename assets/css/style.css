@@ -77,8 +77,10 @@ a:hover {
   padding: 0 1.5rem;
 }
 
-.narrow {
-  max-width: 760px;
+/* Text-heavy sections share the full container's left edge with the hero and
+   Program, so every heading lines up; only the line length is capped. */
+.narrow > * {
+  max-width: 44.5rem;
 }
 
 .skip-link {
@@ -395,40 +397,69 @@ a:hover {
 
 /* ---------- sponsors ---------- */
 
-.sponsor-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+.sponsor-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem 4rem;
 }
 
-.sponsor {
-  display: block;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  padding: 1.25rem 1.35rem;
+/* No transform/opacity/filter on the link itself: any of those would isolate
+   the image's blend mode and bring the white logo backgrounds back. */
+.sponsor-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  border-radius: 6px;
 }
 
-.sponsor:hover {
-  border-color: var(--accent);
-  box-shadow: 0 2px 10px rgba(28, 26, 23, 0.06);
+.sponsor-logo:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 8px;
 }
 
-.sponsor-name {
+/* The logos are JPEGs on white; multiply lets the band colour show through. */
+.sponsor-logo img {
+  display: block;
+  height: 96px;
+  width: auto;
+  mix-blend-mode: multiply;
+  transition: opacity 0.15s ease;
+}
+
+.sponsor-logo img.sponsor-seal {
+  height: 84px;
+}
+
+.sponsor-logo:hover img {
+  opacity: 0.8;
+}
+
+.sponsor-wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.sponsor-wordmark-name {
   font-family: var(--serif);
-  font-size: 1.15rem;
+  font-size: 2.1rem;
   font-weight: 600;
+  letter-spacing: 0.03em;
   color: var(--accent);
-  margin: 0 0 0.25rem;
 }
 
-.sponsor-desc {
-  margin: 0;
+.sponsor-wordmark-desc {
+  max-width: 15em;
+  margin-top: 0.2rem;
+  font-size: 0.86rem;
   color: var(--ink-soft);
-  font-size: 0.92rem;
+}
+
+.sponsor-logo:hover .sponsor-wordmark-name {
+  color: var(--accent-dark);
 }
 
 /* ---------- contact ---------- */
@@ -529,9 +560,20 @@ a:hover {
 
   .facts-grid,
   .schedule,
-  .topics ul,
-  .sponsor-grid {
+  .topics ul {
     grid-template-columns: 1fr;
+  }
+
+  .sponsor-logos {
+    gap: 1.75rem;
+  }
+
+  .sponsor-logo img {
+    height: 80px;
+  }
+
+  .sponsor-logo img.sponsor-seal {
+    height: 72px;
   }
 
   .footer-inner {

@@ -216,6 +216,7 @@ def main() -> None:
         if baseurl:
             html = html.replace(baseurl + "/", "/")
         html = html.replace('href="/assets/', 'href="assets/')
+        html = html.replace('src="/assets/', 'src="assets/')
         out_name = "index.html" if name in ("index.html", "index.md") else name
         os.makedirs(os.path.join(OUT, os.path.dirname(out_name)), exist_ok=True)
         with open(os.path.join(OUT, out_name), "w", encoding="utf-8") as fh:

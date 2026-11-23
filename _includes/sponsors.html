@@ -7,14 +7,22 @@
         LIOS and by Lehigh's Department of Industrial and Systems Engineering.
       </p>
     </div>
-    <div class="sponsor-grid">
-      <a class="sponsor" href="{{ site.lios_url }}">
-        <p class="sponsor-name">LIOS</p>
-        <p class="sponsor-desc">Lehigh ISE Optimization Science Program</p>
+    <div class="sponsor-logos">
+      <!-- LIOS has no logo of its own; its site uses the ISE seal, so the
+           seal plus the program name stands in. To use a real LIOS logo,
+           replace the contents of this link with a single <img>. -->
+      <a class="sponsor-logo" href="{{ site.lios_url }}">
+        <img class="sponsor-seal" src="{{ site.baseurl }}/assets/img/sponsors/ise-seal.jpg"
+             alt="" width="118" height="118">
+        <span class="sponsor-wordmark">
+          <span class="sponsor-wordmark-name">LIOS</span>
+          <span class="sponsor-wordmark-desc">Lehigh ISE Optimization Science Program</span>
+        </span>
       </a>
-      <a class="sponsor" href="{{ site.lehigh_ise_url }}">
-        <p class="sponsor-name">Lehigh ISE</p>
-        <p class="sponsor-desc">Department of Industrial and Systems Engineering</p>
+      <a class="sponsor-logo" href="{{ site.lehigh_ise_url }}">
+        <img src="{{ site.baseurl }}/assets/img/sponsors/lehigh-ise.jpg"
+             alt="Industrial and Systems Engineering, Lehigh University"
+             width="600" height="243">
       </a>
     </div>
   </div>

@@ -16,6 +16,7 @@ _includes/schedule.html  the two day cards in the Program section
 _includes/sponsors.html  the Sponsors band (LIOS / Lehigh ISE)
 _layouts/default.html  header / main / footer shell (carries the draft noindex tag)
 assets/css/style.css   the whole visual design, no external dependencies
+assets/img/sponsors/   sponsor logos (ISE seal for LIOS, ISE banner for Lehigh ISE)
 Gemfile                jekyll ~> 4.3
 robots.txt             belt-and-braces; see the note inside
 .github/workflows/     build + deploy to GitHub Pages
