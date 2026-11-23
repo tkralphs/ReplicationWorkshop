@@ -173,6 +173,19 @@ a:hover {
   margin-bottom: 1.4rem;
 }
 
+.hero-kicker {
+  display: inline-block;
+  margin: 0 0 1.1rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--accent-soft);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
 .hero h1 {
   font-size: clamp(2.1rem, 5vw, 3.5rem);
   max-width: 22ch;
@@ -380,6 +393,44 @@ a:hover {
   margin: 0;
 }
 
+/* ---------- sponsors ---------- */
+
+.sponsor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.sponsor {
+  display: block;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sponsor:hover {
+  border-color: var(--accent);
+  box-shadow: 0 2px 10px rgba(28, 26, 23, 0.06);
+}
+
+.sponsor-name {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 0.25rem;
+}
+
+.sponsor-desc {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
 /* ---------- contact ---------- */
 
 .contact {
@@ -442,6 +493,12 @@ a:hover {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+.footer-sponsor {
+  color: #a9a29a;
+  font-size: 0.82rem;
+  margin-top: 0.4rem !important;
+}
+
 .footer-note p {
   color: #a9a29a;
   font-size: 0.82rem;
@@ -472,7 +529,8 @@ a:hover {
 
   .facts-grid,
   .schedule,
-  .topics ul {
+  .topics ul,
+  .sponsor-grid {
     grid-template-columns: 1fr;
   }
 

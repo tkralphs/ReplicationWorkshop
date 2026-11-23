@@ -121,8 +121,12 @@ Ted Ralphs &middot; Department of Industrial and Systems Engineering,
 Lehigh University &middot;
 [{{ site.contact_email }}](mailto:{{ site.contact_email }})
 
-Organized in association with MOPTA and LIOS at Lehigh University.
+Sponsored by the [LIOS program]({{ site.lios_url }}) and the
+[Department of Industrial and Systems Engineering]({{ site.lehigh_ise_url }})
+at Lehigh University.
 {: .small}
 
 </div>
 </section>
+
+{% include sponsors.html %}

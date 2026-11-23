@@ -18,7 +18,7 @@ baseurl: "/ReplicationWorkshop"
 # Contact / links used across the site
 contact_email: "ted@lehigh.edu"
 mopta_url: "https://coral.ise.lehigh.edu/mopta2027/"
-lehigh_ise_url: "https://ise.lehigh.edu/"
+lehigh_ise_url: "https://engineering.lehigh.edu/ise"
 lios_url: "https://coral.ise.lehigh.edu/lios/"
 
 markdown: kramdown
